@@ -2,7 +2,7 @@
 # $HOME.
 #
 # https://nix-community.github.io/home-manager/index.html#sec-usage-configuration
-{ pkgs, ... }: {
+{ flake, pkgs, ... }: {
   imports = [
     # Add your other home-manager modules here.
   ];
@@ -12,8 +12,14 @@
   # Search for packages here: https://search.nixos.org/packages
   home.packages = with pkgs; [
     nix-output-monitor # https://github.com/maralorn/nix-output-monitor
-    nix-info
+    tmate
+    lazygit
   ];
+
+  # Recommended Nix settings
+  nix = {
+    registry.nixpkgs.flake = flake.inputs.nixpkgs; # https://yusef.napora.org/blog/pinning-nixpkgs-flake/
+  };
 
   # Programs natively supported by home-manager.
   programs = {
