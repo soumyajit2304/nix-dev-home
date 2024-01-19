@@ -14,6 +14,7 @@
     nix-output-monitor # https://github.com/maralorn/nix-output-monitor
     tmate
     lazygit
+    ripgrep
   ];
 
   # Recommended Nix settings
@@ -21,9 +22,19 @@
     registry.nixpkgs.flake = flake.inputs.nixpkgs; # https://yusef.napora.org/blog/pinning-nixpkgs-flake/
   };
 
+  home.shellAliases = {
+    g = "git";
+    lg = "lazygit";
+  };
+
   # Programs natively supported by home-manager.
   programs = {
     bash.enable = true;
+    zoxide.enable = true;
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
 
     # For macOS's default shell.
     zsh = {
